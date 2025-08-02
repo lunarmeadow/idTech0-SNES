@@ -11,7 +11,7 @@ ASM = $(WDCROOT)\Tools\bin\WDC816AS.exe
 LINK = $(WDCROOT)\Tools\bin\WDCLN.exe
 
 INCLUDEPATH = $(WDCROOT)\Tools\include
-LIBPATH = $(WDCROOT)\Tools\lib\cl.lib
+LIBPATH = $(WDCROOT)\Tools\lib\cl
 
 # Compiler/Linker Flags
 
@@ -57,6 +57,12 @@ statedef.obj
 
 noah.sfc:	$(NOAH) noah.ld
 	$(LINK) -F noah.ld -L $(LIBPATH)
+
+.PHONY: clean
+
+# todo: make linux compatible with OS detection
+clean:
+	del /Q *.obj *.sfc
 
 #--------------------------------------------------------------------
 # ASM FILES
