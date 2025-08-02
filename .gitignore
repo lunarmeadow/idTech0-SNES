@@ -1,2 +1,16 @@
 .DS_Store
-.DS_Store
+.vscode
+
+# Object files
+*.o
+*.obj
+
+# ROMs
+*.sfc
+
+# Linker output
+*.map
+*.bnk
+
+# Libraries
+*.lib

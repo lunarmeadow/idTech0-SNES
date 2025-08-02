@@ -1,3 +1,0 @@
-walls1.lbm      32
-walls2.lbm      32
-
