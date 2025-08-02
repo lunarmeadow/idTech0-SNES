@@ -60,9 +60,8 @@ noah.sfc:	$(NOAH) noah.ld
 
 .PHONY: clean
 
-# todo: make linux compatible with OS detection
 clean:
-	del /Q *.obj *.sfc
+	rm -f *.obj *.sfc
 
 #--------------------------------------------------------------------
 # ASM FILES
