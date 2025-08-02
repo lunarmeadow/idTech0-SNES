@@ -14,6 +14,10 @@ The `make` package on Chocolatey is a good choice, or you could use Cygwin or Mi
 
 An MS-DOS environment is required for the legacy tooling present within the repo, and [DOSBox-X](https://github.com/joncampbell123/dosbox-x/releases) is strongly recommended for this purpose.
 
+When mounting the repository for use in DOS, make sure that the root directory is the mount-point, and not any of the sub-directories.
+
+If a script or command can't find a file or directory, please ensure that you aren't mounted to a subdirectory like DATA/
+
 ## Documentation
 
 Below is relevant, official WDC documentation for the 65816 CPU and WDCTools compiler suite.

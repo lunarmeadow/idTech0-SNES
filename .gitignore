@@ -8,6 +8,9 @@
 # ROMs
 *.sfc
 
+# HxD backup
+*.bak
+
 # Linker output
 *.map
 *.bnk
