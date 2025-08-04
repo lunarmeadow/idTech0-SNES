@@ -7,8 +7,6 @@ extern short finetan[];
 extern short finesin[];
 extern short viewtox[];
 extern short xtoview[];
-extern char ballmap;
-extern char logos;
 extern char credpal;
 extern char dimpal;
 extern char credit;
@@ -69,8 +67,8 @@ extern char map26;
 extern char map27;
 extern char map28;
 extern char map29;
+extern char map30;
 extern char sounds;
 extern char shsounds;
 extern char pad;
 
-
