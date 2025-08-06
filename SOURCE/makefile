@@ -4,19 +4,17 @@
 
 # Paths
 
-WDCROOT = C:\wdc
+CC = WDC816CC.exe
+ASM = WDC816AS.exe
+LINK = WDCLN.exe
 
-CC = $(WDCROOT)\Tools\bin\WDC816CC.exe
-ASM = $(WDCROOT)\Tools\bin\WDC816AS.exe
-LINK = $(WDCROOT)\Tools\bin\WDCLN.exe
-
-INCLUDEPATH = $(WDCROOT)\Tools\include
-LIBPATH = $(WDCROOT)\Tools\lib\cl
+INCDIR = $(WDC_INC_65816)
+LIBPATH = $(WDC_LIB)
 
 # Compiler/Linker Flags
 
 DEFINES = -D__ORCAC__ 
-BUILDFLAGS = -ML -SO -WL
+CFLAGS = -ML -SO -WL
 
 #--------------------------------------------------------------------
 #--------------------------------------------------------------------
@@ -56,7 +54,7 @@ wolfmain.obj \
 statedef.obj
 
 noah.sfc:	$(NOAH) noah.ld
-	$(LINK) -F noah.ld -L $(LIBPATH)
+	$(LINK) -F noah.ld -L $(LIBPATH)\cl
 
 .PHONY: clean
 
@@ -97,69 +95,67 @@ rsprite.obj:	snes.equ idmacros.asm rsprite.asm
 #--------------------------------------------------------------------
 
 tables.obj:	wolfdef.h sprites.h tables.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) tables.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) tables.c
 
 sounds.obj: sounds.c
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) sounds.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) sounds.c
 
 wolfio.obj:	refresh.h sneswolf.h wolfdef.h sprites.h version.h extdata.h noahmisc.h iosnes.h wolfio.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) wolfio.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) wolfio.c
 
 snesmain.obj:	refresh.h sneswolf.h wolfdef.h sprites.h version.h extdata.h noahmisc.h iosnes.h snesmain.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) snesmain.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) snesmain.c
 
 intermis.obj:	sneswolf.h wolfdef.h sprites.h version.h extdata.h noahmisc.h iosnes.h intermis.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) intermis.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) intermis.c
 
 music.obj:	refresh.h sneswolf.h wolfdef.h sprites.h version.h extdata.h noahmisc.h iosnes.h music.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) music.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) music.c
 
 intro.obj:	wolfdef.h sprites.h sneswolf.h wolfdef.h sprites.h version.h extdata.h noahmisc.h iosnes.h intro.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) intro.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) intro.c
 
 doors.obj:	wolfdef.h sprites.h doors.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) doors.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) doors.c
 
 enmove.obj:	wolfdef.h sprites.h enmove.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) enmove.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) enmove.c
 
 enthink.obj:	wolfdef.h sprites.h enthink.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) enthink.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) enthink.c
 
 level.obj:	wolfdef.h sprites.h level.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) level.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) level.c
 
 missiles.obj:	wolfdef.h sprites.h missiles.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) missiles.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) missiles.c
 
 plmove.obj:	wolfdef.h sprites.h plmove.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) plmove.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) plmove.c
 
 plstuff.obj:	wolfdef.h sprites.h plstuff.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) plstuff.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) plstuff.c
 
 plthink.obj:	wolfdef.h sprites.h plthink.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) plthink.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) plthink.c
 
 pushwall.obj:	wolfdef.h sprites.h pushwall.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) pushwall.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) pushwall.c
 
 refresh.obj:	refresh.h refresh.c
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) refresh.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) refresh.c
 
 refbsp.obj:	refresh.h refbsp.c
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) refbsp.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) refbsp.c
 
 refspr.obj:	refresh.h sprstruc.c refspr.c
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) refspr.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) refspr.c
 
 sight.obj:	wolfdef.h sprites.h sight.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) sight.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) sight.c
 
 wolfmain.obj:	wolfdef.h sprites.h wolfmain.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) wolfmain.c
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) wolfmain.c
 
 statedef.obj:	wolfdef.h sprites.h statedef.c sounds.h states.h
-	$(CC) $(DEFINES) $(BUILDFLAGS) -I $(INCLUDEPATH) statedef.c
-
-
+	$(CC) $(DEFINES) $(CFLAGS) -I $(INCDIR) statedef.c
