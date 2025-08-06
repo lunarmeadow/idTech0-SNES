@@ -13,6 +13,9 @@ LIBPATH = $(WDC_LIB)
 
 OUTROM = out/noah.sfc
 
+# Set to desired emulator, preferably an accurate debugging SNES emulator.
+EMULATORPATH = E:\Mesen\Mesen.exe
+
 # Compiler/Linker Flags
 
 DEFINES = -D__ORCAC__ 
@@ -21,6 +24,12 @@ CFLAGS = -ML -SO -WL
 # Post-Build Tools
 
 DATAINS = "BUILD/DataInsert.exe"
+PADDER = "BUILD/Padder.exe"
+
+# Flags
+
+# 1 = run emulator with rom, 0 = don't run
+RUN_ON_BUILD=1
 
 #--------------------------------------------------------------------
 #--------------------------------------------------------------------
@@ -61,10 +70,17 @@ statedef.obj
 
 # PRE-BUILD: Delete ROM to allow new BUILD
 # POST-BUILD: Delete OBJ files to reduce clutter and allow faster builds by simply running make
+
+# Make sure if you change emulator that you adjust command line parameters as required.
+
 noah.sfc: clean_rom $(NOAH) noah.ld
 	$(LINK) -F noah.ld -L "$(LIBPATH)\cl" && \
 	$(MAKE) clean_obj && \
-	$(DATAINS) --rom $(OUTROM) --dir BUILD/DATA/
+	$(DATAINS) --rom $(OUTROM) --dir BUILD/DATA/ && \
+	$(PADDER) --rom $(OUTROM)
+ifeq ($(RUN_ON_BUILD),1)
+	$(EMULATORPATH) $(OUTROM)
+endif
 
 .PHONY: clean clean_rom clean_obj
 
