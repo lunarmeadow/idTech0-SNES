@@ -18,6 +18,10 @@ When mounting the repository for use in DOS, make sure that the root directory i
 
 If a script or command can't find a file or directory, please ensure that you aren't mounted to a subdirectory like DATA/
 
+Setting the file sort order in your code editor to type is highly recommended to make navigating the codebase easier.
+
+In VS Code this can be done with `"explorer.sortOrder": "type"` in the user settings .json
+
 ## Documentation
 
 Below is relevant, official WDC documentation for the 65816 CPU and WDCTools compiler suite.

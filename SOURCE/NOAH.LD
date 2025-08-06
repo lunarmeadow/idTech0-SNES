@@ -1,4 +1,4 @@
--O NOAH.SFC
+-O OUT/NOAH.SFC
 -T
 -SZ
 -B
@@ -45,4 +45,3 @@ refspr.obj
 sight.obj
 wolfmain.obj
 statedef.obj
-

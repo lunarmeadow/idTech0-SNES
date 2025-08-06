@@ -11,10 +11,16 @@ LINK = WDCLN.exe
 INCDIR = $(WDC_INC_65816)
 LIBPATH = $(WDC_LIB)
 
+OUTROM = out/noah.sfc
+
 # Compiler/Linker Flags
 
 DEFINES = -D__ORCAC__ 
 CFLAGS = -ML -SO -WL
+
+# Post-Build Tools
+
+DATAINS = "BUILD/DataInsert.exe"
 
 #--------------------------------------------------------------------
 #--------------------------------------------------------------------
@@ -53,10 +59,20 @@ sight.obj \
 wolfmain.obj \
 statedef.obj
 
-noah.sfc:	$(NOAH) noah.ld
-	$(LINK) -F noah.ld -L $(LIBPATH)\cl
+# PRE-BUILD: Delete ROM to allow new BUILD
+# POST-BUILD: Delete OBJ files to reduce clutter and allow faster builds by simply running make
+noah.sfc: clean_rom $(NOAH) noah.ld
+	$(LINK) -F noah.ld -L "$(LIBPATH)\cl" && \
+	$(MAKE) clean_obj && \
+	$(DATAINS) --rom $(OUTROM) --dir BUILD/DATA/
 
-.PHONY: clean
+.PHONY: clean clean_rom clean_obj
+
+clean_rom:
+	rm -f $(OUTROM)
+
+clean_obj:
+	rm -f *.obj
 
 clean:
 	rm -f *.obj *.sfc
