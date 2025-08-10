@@ -14,11 +14,13 @@ LIBPATH = $(WDC_LIB)
 OUTROM = out/noah.sfc
 
 # Set to desired emulator, preferably an accurate debugging SNES emulator.
-EMULATORPATH = E:\Mesen\Mesen.exe
+# Default Mesen is recommended. Regardless, place your emulator's root folder in your system's PATH variable.
+# If automatically launching the ROM is not desired, please disable RUN_ON_BUILD.
+EMULATOR = Mesen.exe
 
 # Compiler/Linker Flags
 
-DEFINES = -D__ORCAC__ 
+DEFINES = -D__ORCAC__
 CFLAGS = -ML -SO -WL
 
 # Post-Build Tools
@@ -79,7 +81,7 @@ noah.sfc: clean_rom $(NOAH) noah.ld
 	$(DATAINS) --rom $(OUTROM) --dir BUILD/DATA/ && \
 	$(PADDER) --rom $(OUTROM)
 ifeq ($(RUN_ON_BUILD),1)
-	$(EMULATORPATH) $(OUTROM)
+	$(EMULATOR) $(OUTROM)
 endif
 
 .PHONY: clean clean_rom clean_obj

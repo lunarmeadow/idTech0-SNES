@@ -1,8 +1,4 @@
-@l43
-@copy ..\data\extdata.bin >nul
-@copy ..\data\extdata.asm >nul
+@copy ..\data\extdata.bin .\BUILD\DATA
+@copy ..\data\extdata.asm .
 @REM @copy ..\data\extdata.h >nul
 @echo Warning! EXTDATA.H not copied...
-
-
-
