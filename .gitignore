@@ -16,6 +16,7 @@
 # Linker output
 *.map
 *.bnk
+*.mlb
 
 # Libraries
 *.lib

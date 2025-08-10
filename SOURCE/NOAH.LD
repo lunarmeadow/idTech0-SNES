@@ -1,6 +1,5 @@
 -O OUT/NOAH.SFC
 -T
--SZ
 -B
 -HB
 -E

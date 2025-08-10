@@ -12,6 +12,8 @@ INCDIR = $(WDC_INC_65816)
 LIBPATH = $(WDC_LIB)
 
 OUTROM = out/noah.sfc
+OUTMAP = out/noah.map
+OUTMLB = out/noah.mlb
 
 # Set to desired emulator, preferably an accurate debugging SNES emulator.
 # Default Mesen is recommended. Regardless, place your emulator's root folder in your system's PATH variable.
@@ -27,6 +29,7 @@ CFLAGS = -ML -SO -WL
 
 DATAINS = "BUILD/DataInsert.exe"
 PADDER = "BUILD/Padder.exe"
+MAPPARSE = "BUILD/MapParser.exe"
 
 # Flags
 
@@ -75,14 +78,22 @@ statedef.obj
 
 # Make sure if you change emulator that you adjust command line parameters as required.
 
+# The if/else block in RUN_ON_BUILD is to start and then detach an emulator from the makefile script. The Linux functionality is untested, 
+# as this repo is primarily for Windows.
+
+ifeq ($(OS),Windows_NT)
+    EMULATORCMD = start "" $(EMULATOR) $(OUTROM)
+else
+	EMULATORCMD = $(EMULATOR) $(OUTROM) >/dev/null 2>&1 &
+endif
+
 noah.sfc: clean_rom $(NOAH) noah.ld
 	$(LINK) -F noah.ld -L "$(LIBPATH)\cl" && \
 	$(MAKE) clean_obj && \
 	$(DATAINS) --rom $(OUTROM) --dir BUILD/DATA/ && \
-	$(PADDER) --rom $(OUTROM)
-ifeq ($(RUN_ON_BUILD),1)
-	$(EMULATOR) $(OUTROM)
-endif
+	$(PADDER) --rom $(OUTROM) && \
+	$(MAPPARSE) --map $(OUTMAP) --sym $(OUTMLB) && \
+	if [ "$(RUN_ON_BUILD)" = "1" ]; then $(EMULATORCMD); fi
 
 .PHONY: clean clean_rom clean_obj
 
