@@ -17,7 +17,7 @@ namespace FreeBytes
             { "UDATA", 65536 },
             { "boot", 992 },
             { "vectors", 32 },
-            { "primitiv", 65536 } // custom code segment, *probably* just a 64k bank.
+            { "primitiv", 4096 }
         };
 
         private static void Main(string[] args)
