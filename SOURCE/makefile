@@ -13,6 +13,7 @@ LIBPATH = $(WDC_LIB)
 
 OUTROM = out/noah.sfc
 OUTMAP = out/noah.map
+OUTBNK = out/noah.bnk
 OUTMLB = out/noah.mlb
 
 # Set to desired emulator, preferably an accurate debugging SNES emulator.
@@ -23,13 +24,15 @@ EMULATOR = Mesen.exe
 # Compiler/Linker Flags
 
 DEFINES = -D__ORCAC__
-CFLAGS = -ML -SO -WL
+CFLAGS = -ML -SO -WL -QQ
+ASMFLAGS = 
 
 # Post-Build Tools
 
-DATAINS = "BUILD/DataInsert.exe"
-PADDER = "BUILD/Padder.exe"
-MAPPARSE = "BUILD/MapParser.exe"
+DATAINS = BUILD/DataInsert.exe
+PADDER = BUILD/Padder.exe
+MAPPARSE = BUILD/MapParser.exe
+FREEBYTES = BUILD/FreeBytes.exe
 
 # Flags
 
@@ -88,23 +91,24 @@ else
 endif
 
 noah.sfc: clean_rom $(NOAH) noah.ld
-	$(LINK) -F noah.ld -L "$(LIBPATH)\cl" && \
+	@$(LINK) -F noah.ld -L "$(LIBPATH)\cl" && \
 	$(MAKE) clean_obj && \
 	$(DATAINS) --rom $(OUTROM) --dir BUILD/DATA/ && \
 	$(PADDER) --rom $(OUTROM) && \
 	$(MAPPARSE) --map $(OUTMAP) --sym $(OUTMLB) && \
+	$(FREEBYTES) --bank $(OUTBNK) && \
 	if [ "$(RUN_ON_BUILD)" = "1" ]; then $(EMULATORCMD); fi
 
 .PHONY: clean clean_rom clean_obj
 
 clean_rom:
-	rm -f $(OUTROM)
+	@rm -f $(OUTROM)
 
 clean_obj:
-	rm -f *.obj
+	@rm -f *.obj
 
 clean:
-	rm -f *.obj *.sfc
+	@rm -f *.obj *.sfc
 
 #--------------------------------------------------------------------
 # ASM FILES

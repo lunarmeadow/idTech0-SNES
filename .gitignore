@@ -17,6 +17,7 @@
 *.map
 *.bnk
 *.mlb
+*.err
 
 # Libraries
 *.lib
