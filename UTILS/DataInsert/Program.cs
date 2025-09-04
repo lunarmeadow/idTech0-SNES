@@ -4,11 +4,6 @@ using System.CommandLine;
 
 internal class Program
 {
-    private const int pDEMO1 = 0xE000;
-    private const int pDEMO2 = 0xF000;
-    private const int pSCALERS = 0x10000;
-    private const int pEXTDATA = 0x20000;
-
     private const byte pad = 0x00;
 
     private static void Main(string[] args)
