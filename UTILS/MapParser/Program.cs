@@ -70,7 +70,7 @@ internal class Program
             if (!rhs.Contains("_BEG_") &&
                 !rhs.Contains("_END_"))
             {
-                if (bank >= 0xC0 && bank <= 0xD0)
+                if (bank >= 0xC0 && bank < 0xD0)
                     // CODE segment. The bank mask will add any overflow into other banks to the address. For instance, C0FFFF must be represented FFFF, and C1FFFF must be represented 1FFFF.
                     outBuild.AppendLine($"SnesPrgRom:{((bank & ~0xC0) == 0 ? "" : bank & ~0xC0):X}{addr:X4}:{rhs}:Auto-generated function");
                 if (bank >= 0x7E && bank <= 0x7F)
